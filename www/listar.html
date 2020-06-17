@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+     <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // PhoneGap event handler
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            console.log("PhoneGap is ready");
+        }
+
+              $(document).on("click","#salvar", function(){
+              var parametros = {
+                "nome":$("#nome").val(),
+                "senha":$("senha").val(),
+                "email":$("email").val()
+              }
+
+              $.ajax({
+                type:"post",//como vou enviar os dados 
+                url:"http://wordpress-online-2.000webhostapp.com/webservice/cadastra.php",
+                data:parametros,
+                success: function(data){
+                  navigator.notification.alert(data);
+
+                  $("#nome").val(""),
+                  $("#senha").val(""),
+                  $("#email").val("")
+                },
+                error: function(data){
+                   navigator.notification.alert("erro no cadastro");
+                }
+              })
+        });
+
+        $(document).on("click","#listar", function(){
+          $(location).attr("href","index.html");
+        })
+
+  </script>
+</head>
+<body>
+
+   <div class="container">
+     <div class="row">
+       <div class="col-12">
+        <h2> Cadastrar</h2>
+       </div>
+     </div>
+
+
+     
+     
+
+     <div class="row">
+       <div class="col-12">
+         <div class="from-group">
+           <label for="">Nome</label>
+           <input type="text" class="form-control" id="nome">
+         </div>
+       </div>
+     </div>
+
+      <div class="row">
+       <div class="col-12">
+         <div class="from-group">
+           <label for="">E-mail:</label>
+           <input type="text" class="form-control" id="email">
+         </div>
+       </div>
+     </div>
+
+     <div class="row">
+       <div class="col-12">
+         <div class="from-group">
+           <label for="">Senha:</label>
+           <input type="password" class="form-control" id="senha">
+         </div>
+       </div>
+     </div><br>
+
+      <div class="row" style="padding-top:100px;">
+
+         <div class="col-6">
+         <div class="from-group">
+           <button class="btn btn-primary btn-block" id="listar">Voltar</button>
+         </div>
+       </div>
+      
+
+       <div class="col-6">
+         <div class="from-group">
+           <button class="btn btn-success btn-block" id="salvar">Salvar</button>
+         </div>
+       </div>
+      </div>
+
+     
+      
+
+
+
+  </div>
+     
+
+</body>
+</html>
